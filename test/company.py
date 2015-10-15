@@ -6,8 +6,9 @@ import matplotlib.pyplot as plt
 
 class Company:
 
-	def __init__(self,name):
+	def __init__(self,name,d_data):
 		self.name=name
+		self.d_data=d_data
 
 	def plot(self,start_day,end_day,filename="graph"):
 		share=Share(self.name)
