@@ -22,7 +22,9 @@ from chainer import cuda
 import chainer.functions as F
 from chainer import optimizers
 
-dataname = "AMZN5.pkl"
+
+company_name="AMZN"
+dataname = "../data/"+company_name+".pkl"
 LOG_FILENAME = 'log_train.txt'
 
 ## Standardization function

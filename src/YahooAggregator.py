@@ -89,6 +89,10 @@ class yahoo_aggregator:
 if __name__=="__main__":
 	ya=yahoo_aggregator()
 	ya.make_csv("GOOG","2015-09-30")
+	ya.make_csv("AMZN","2015-09-30")
+	ya.make_csv("YHOO","2015-09-30")
+	
+
 	
 	#data=ya.get_data(Share("GOOG"),"2015-09-07")
 
