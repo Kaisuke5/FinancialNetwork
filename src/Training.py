@@ -85,7 +85,7 @@ class Training:
     ## Method
     ## Neural net architecture
     ## softmax and accuracy for discrimination task
-    def forward(self, x_data, y_data, dropout, train=True):
+    def forward_disc(self, x_data, y_data, dropout, train=True):
         x, t = chainer.Variable(x_data), chainer.Variable(y_data)
         h1 = F.dropout(F.sigmoid(self.model.l1(x)), ratio=dropout, train=train)
         h2 = F.dropout(F.sigmoid(self.model.l2(h1)), ratio=dropout, train=train)
@@ -102,7 +102,7 @@ class Training:
             x_batch = np.asarray(self.x_train[perm[i:i + self.batchsize]])
             y_batch = np.asarray(self.y_train[perm[i:i + self.batchsize]])
             self.optimizer.zero_grads()
-            loss, acc = self.forward(x_batch, y_batch, self.dropout)
+            loss, acc = self.forward_disc(x_batch, y_batch, self.dropout)
             loss.backward()
             self.optimizer.update()
             sum_loss += float(loss.data) * len(y_batch)
@@ -118,7 +118,7 @@ class Training:
         for i in six.moves.range(0, self.N_test, self.batchsize):
             x_batch = np.asarray(self.x_test[i:i + self.batchsize])
             y_batch = np.asarray(self.y_test[i:i + self.batchsize])
-            loss, acc = self.forward(x_batch, y_batch, self.dropout, train=False)
+            loss, acc = self.forward_disc(x_batch, y_batch, self.dropout, train=False)
             sum_loss += float(loss.data) * len(y_batch)
             sum_accuracy += float(acc.data) * len(y_batch)
         self.test_mean_loss.append(sum_loss / self.N_test)
