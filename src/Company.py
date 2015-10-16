@@ -76,7 +76,7 @@ class Company:
 
 
 	
-	def make_pikle(self,output):
+	def make_pickle(self,output):
 		filename="../data/"+".pkl"
 		Data= {}
 		Data['data'] = [0 for raw in output["target"]]
