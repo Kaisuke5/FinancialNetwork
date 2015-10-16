@@ -13,6 +13,7 @@ class yahoo_aggregator:
 	def make_csv(self,name,now_time):
 		print "making %s.csv....." %name
 		share=Share(name)
+		
 		start=share.get_info()["start"]
 		
 		obj=share.get_historical(start,now_time)
