@@ -111,7 +111,7 @@ if __name__=="__main__":
 
 	#20days one feature 
 	output=company.make_train_data(30,10,0.3)
-	company.make_pikle(output)
+	company.make_pickle(output)
 	
 
 	c=0
