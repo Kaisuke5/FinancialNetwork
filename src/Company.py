@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from YahooAggregator import yahoo_aggregator 
 import pickle
 import six
-
+import numpy as np
 
 
 class Company:
@@ -15,6 +15,7 @@ class Company:
 		self.yahoo_data=[]
 		self.yahoo_feature=[]
 		self.name=name
+		
 		
 
 
@@ -30,9 +31,9 @@ class Company:
 
 
 	# target
-	# x_var_high:最高値の変化量
-	# x_var_low:最高値の変化量
-	# x_var_vol:取引量
+	# x_high:最高値の変化量
+	# x_low:最高値の変化量
+	# x_vol:取引量
 
 	#これをk日分を一つの入力
 	#ある時点からterm日間でその時点の株価からper%分値上がりしてたら1を正解データへ
@@ -43,51 +44,46 @@ class Company:
 		N=1
 
 		print"making trainning data"
-		size=len(self.yahoo_data["aver_price"])
+		size=len(self.yahoo_data["aver"])
+		col=size-term-k+1
+
+
+		#初期化 最初の時点
+
+		self.x_yahoo_data=np.zeros((col,3*k))
+		self.y_yahoo_data=np.zeros(col)
+
+
+		#print len(self.yahoo_data["aver"]),len(self.yahoo_data["low"]),len(self.yahoo_data["high"])
 		
-		#print len(self.yahoo_data["aver_price"]),len(self.yahoo_data["var_low"]),len(self.yahoo_data["var_high"])
-
-		x_var_high=[]
-		x_var_low=[]
-		x_var_vol=[]
-		y_list=[]
-
 		day=k
-
+		index=0
 		#targetをつくる term内にper%あがったら1
 		while (day+term)<=size:
-			y=0
-			for p in self.yahoo_data["aver_price"][day:day+term]:
-				if p>=self.yahoo_data["aver_price"][day]*float(1+per):
-					y=1
-					break
 
-			x_var_high.append(list(self.yahoo_data["var_high"][day-k:day]))
-			x_var_low.append(list(self.yahoo_data["var_low"][day-k:day]))
-			x_var_vol.append(list(self.yahoo_data["var_vol"][day-k:day]))
-			y_list.append(y)
-			
+			maxaver=np.max(self.yahoo_data["aver"][day:day+term])
+			print maxaver/self.yahoo_data["aver"][day]
+
+			x_high=list(self.yahoo_data["high"][day-k:day])
+			x_low=list(self.yahoo_data["low"][day-k:day])
+			x_vol=list(self.yahoo_data["vol"][day-k:day])
+
+			self.x_yahoo_data[index]=x_high+x_low+x_vol
+			print maxaver,self.yahoo_data["aver"][day]
+			self.y_yahoo_data[index]=maxaver/self.yahoo_data["aver"][day]-1
 			#何日おきにつくるか
 			day+=N
-
-		output={"var_high":x_var_high,"var_low":x_var_low,"var_vol":x_var_vol,"target":y_list}
-		print "taget rate %d/%d" % (len(filter(lambda n:n==1,output["target"])),len(output["target"]))
+			print index,col
+			index+=1
+			
+			
+		output={"data":self.x_yahoo_data,"target":self.y_yahoo_data}
 		return output
 
 
 	
-	def make_pickle(self,output):
+	def make_pickle(self,Data):
 		filename="../data/"+".pkl"
-		Data= {}
-		Data['data'] = [0 for raw in output["target"]]
-		Data['target'] = [0 for raw in output["target"]]
-
-
-		for i in range(len(output["target"])):
-			data=list(output["var_high"][i]+output["var_low"][i]+output["var_vol"][i])
-			Data["data"][i]=data
-			Data["target"][i]=output["target"][i]
-
 
 		with open("../data/"+filename,'wb') as output:
 			six.moves.cPickle.dump(Data,output,-1)
@@ -99,27 +95,26 @@ class Company:
 		
 
 	def plot(self,filename="graph"):
-		plt.plot(self.yahoo_data["aver_price"])
+		print self.yahoo_data["aver"][0:5]
+		plt.plot(self.yahoo_data["aver"])
 		#plt.show()
 		plt.savefig(filename+".jpg")
 
 if __name__=="__main__":
 	ya=yahoo_aggregator()
-	company_name="AMZN"
+	company_name="GOOG"
 	company=Company(company_name)
 	company.get_data(ya)
 
 	#20days one feature 
 	output=company.make_train_data(30,10,0.3)
 	company.make_pickle(output)
+	company.plot()
 	
 
-	c=0
-	for i in output["target"]:
-		if i ==1: c+=1
-
-	print c,len(output["target"])
-
+	
+	
+	print np.mean(output["target"])
 
 
 
@@ -132,7 +127,7 @@ if __name__=="__main__":
 
 
 	for i in range(len(output["target"])):
-		data=list(output["var_high"][i]+output["var_low"][i]+output["var_vol"][i])
+		data=list(output["high"][i]+output["low"][i]+output["vol"][i])
 		GOOG["data"][i]=data
 		GOOG["target"][i]=output["target"][i]
 

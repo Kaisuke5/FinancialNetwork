@@ -2,6 +2,10 @@
 from yahoo_finance import Share
 import csv
 from pprint import pprint
+import numpy as np
+
+
+
 class yahoo_aggregator:
 
 	def __init__(self):
@@ -57,11 +61,11 @@ class yahoo_aggregator:
 
 
 		obj.reverse()
-
-		var_high=[]
-		var_low=[]
-		var_vol=[]
-		aver_price=[]
+	
+		high=np.array([],dtype="float32")
+		low=np.array([],dtype="float32")
+		vol=np.array([],dtype="float32")
+		aver=np.array([],dtype="float32")
 
 
 		before_high=float(obj[0]["High"])
@@ -69,17 +73,19 @@ class yahoo_aggregator:
 		before_vol=float(obj[0]["Volume"])
 
 		for day in obj[1:]:
-			aver_price.append((float(day["High"])+float(day["Low"]))/2)
-			var_high.append((float(day["High"])-before_high)/before_high)
-			var_low.append((float(day["Low"])-before_low)/before_low)
-			var_vol.append((float(day["Volume"])-before_vol)/before_vol)
+		
+			aver=np.append(aver,(float(day["High"])+float(day["Low"]))/2)
+			high=np.append(high,(float(day["High"])-before_high)/before_high)
+			low=np.append(low,(float(day["Low"])-before_low)/before_low)
+			vol=np.append(vol,(float(day["Volume"])-before_vol)/before_vol)
+
 
 			before_high=float(day["High"])
 			before_low=float(day["Low"])
 			before_vol=float(day["Volume"])
 
 
-		output={"start":start,"var_high":var_high,"var_low":var_low,"var_vol":var_vol,"aver_price":aver_price}
+		output={"start":start,"high":high,"low":low,"vol":vol,"aver":aver}
 		return output
 
 
@@ -89,9 +95,8 @@ class yahoo_aggregator:
 
 if __name__=="__main__":
 	ya=yahoo_aggregator()
-	ya.make_csv("GOOG","2015-09-30")
-	ya.make_csv("AMZN","2015-09-30")
-	ya.make_csv("YHOO","2015-09-30")
+	ya.make_csv("PG","2015-09-30")
+	ya.get_data(Share("PG"),"PG")
 	
 
 	
