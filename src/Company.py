@@ -1,11 +1,21 @@
 #coding:utf-8
+""" 
+Company class file: converting data and make pickle of ['data'] and ['target']
+
+Kai & Shiba
+
+Last Stable:
+2015/10/16
+
+Last updated:
+2015/10/16
+"""
 from yahoo_finance import Share
 from pprint import pprint
 import matplotlib.pyplot as plt
-from YahooAggregator import yahoo_aggregator 
+from YahooAggregator import Yahoo_aggregator 
 import pickle
 import six
-
 
 
 class Company:
@@ -16,11 +26,6 @@ class Company:
 		self.yahoo_feature=[]
 		self.name=name
 		
-
-
-
-		
-
 
 	#csvからaggregatorでデータをとってくる(まだ加工前)
 	def get_data(self,aggregator):
@@ -104,7 +109,7 @@ class Company:
 		plt.savefig(filename+".jpg")
 
 if __name__=="__main__":
-	ya=yahoo_aggregator()
+	ya=Yahoo_aggregator()
 	company_name="AMZN"
 	company=Company(company_name)
 	company.get_data(ya)
@@ -124,6 +129,8 @@ if __name__=="__main__":
 
 
 """
+MEMO::
+
 	import pickle
 	import six
 	GOOG= {}

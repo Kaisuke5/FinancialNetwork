@@ -1,13 +1,25 @@
 #coding:utf-8
+""" 
+Read from Yahoo-finance and make csv file
+
+Kai & Shiba
+
+Last Stable:
+2015/10/16
+
+Last updated:
+2015/10/16
+"""
 from yahoo_finance import Share
 import csv
 from pprint import pprint
-class yahoo_aggregator:
+
+
+class Yahoo_aggregator:
 
 	def __init__(self):
-		self.DIR_NAME="../data/"
+		self.DIR_NAME="../data/"		# 後でdataへのシンボリックリンクを張る？
 		pass
-
 
 
 	def make_csv(self,name,now_time):
@@ -33,22 +45,16 @@ class yahoo_aggregator:
 		f.close()
 
 
-
-
-
-
 	def get_data(self,share,name):
 
 		start=share.get_info()["start"]
 
 		#yahoo_financeから
 		#obj=share.get_historical(start,now_time)
-	
 
 		#csvからよみこみ
 
 		f=open(self.DIR_NAME+name+".csv","r")
-		#f=open("kaiai.csv","r")
 		print "reading "+name+".csv"
 		reader = csv.DictReader(f)
 		obj=[]
@@ -88,22 +94,26 @@ class yahoo_aggregator:
 
 
 if __name__=="__main__":
-	ya=yahoo_aggregator()
+	ya=Yahoo_aggregator()
 	ya.make_csv("GOOG","2015-09-30")
 	ya.make_csv("AMZN","2015-09-30")
 	ya.make_csv("YHOO","2015-09-30")
 	
 
-	
 	#data=ya.get_data(Share("GOOG"),"2015-09-07")
 
 	"""
-	ya=yahoo_aggregator()
+	ya=Yahoo_aggregator()
 	data=ya.get_data(Share("YHOO"),"2000-09-01","2000-09-07")
 	print data["var_high"]
 	"""
 
+"""
+MEMO
 
+		#f=open("kaiai.csv","r")
+
+"""
 
 
 
