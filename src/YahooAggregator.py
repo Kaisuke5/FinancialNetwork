@@ -1,4 +1,15 @@
 #coding:utf-8
+""" 
+Read from Yahoo-finance and make csv file
+
+Kai & Shiba
+
+Last Stable:
+2015/10/16
+
+Last updated:
+2015/10/16
+"""
 from yahoo_finance import Share
 import csv
 from pprint import pprint
@@ -6,13 +17,21 @@ import numpy as np
 
 
 
-class yahoo_aggregator:
+
+import os
+
+
+
+class Yahoo_aggregator:
 
 	def __init__(self):
 		self.DIR_NAME="../data/"
 		pass
 
-
+	def csv_check(self,name,now_time):
+	    if not os.path.exists(self.DIR_NAME+name+".csv"):
+	    	print "making csv..."
+	    	self.make_csv(name,now_time)
 
 	def make_csv(self,name,now_time):
 		print "making %s.csv....." %name
@@ -37,22 +56,14 @@ class yahoo_aggregator:
 		f.close()
 
 
-
-
-
-
+	#yahoo_financeから
+	#obj=share.get_historical(start,now_time)
+	#csvからよみこみ
 	def get_data(self,share,name):
-
+		self.csv_check(name,"2015-09-30")			#csvの存在チェック
 		start=share.get_info()["start"]
 
-		#yahoo_financeから
-		#obj=share.get_historical(start,now_time)
-	
-
-		#csvからよみこみ
-
 		f=open(self.DIR_NAME+name+".csv","r")
-		#f=open("kaiai.csv","r")
 		print "reading "+name+".csv"
 		reader = csv.DictReader(f)
 		obj=[]
@@ -61,7 +72,7 @@ class yahoo_aggregator:
 
 
 		obj.reverse()
-	
+
 		high=np.array([],dtype="float32")
 		low=np.array([],dtype="float32")
 		vol=np.array([],dtype="float32")
@@ -94,21 +105,28 @@ class yahoo_aggregator:
 
 
 if __name__=="__main__":
-	ya=yahoo_aggregator()
-	ya.make_csv("PG","2015-09-30")
-	ya.get_data(Share("PG"),"PG")
-	
 
-	
+
+	ya=Yahoo_aggregator()
+	ya.make_csv("GOOG","2015-09-30")
+	output=ya.get_data(Share("GOOG"),"GOOG")
+	print output["aver"][:10]
+
+
 	#data=ya.get_data(Share("GOOG"),"2015-09-07")
 
 	"""
-	ya=yahoo_aggregator()
+	ya=Yahoo_aggregator()
 	data=ya.get_data(Share("YHOO"),"2000-09-01","2000-09-07")
 	print data["var_high"]
 	"""
 
+"""
+MEMO
 
+		#f=open("kaiai.csv","r")
+
+"""
 
 
 

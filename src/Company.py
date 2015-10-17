@@ -1,11 +1,23 @@
 #coding:utf-8
+""" 
+Company class file: converting data and make pickle of ['data'] and ['target']
+
+Kai & Shiba
+
+Last Stable:
+2015/10/16
+
+Last updated:
+2015/10/16
+"""
 from yahoo_finance import Share
 from pprint import pprint
 import matplotlib.pyplot as plt
-from YahooAggregator import yahoo_aggregator 
+from YahooAggregator import Yahoo_aggregator 
 import pickle
 import six
 import numpy as np
+import os
 
 
 class Company:
@@ -16,11 +28,6 @@ class Company:
 		self.yahoo_feature=[]
 		self.name=name
 		
-		
-
-
-
-		
 
 
 	#csvからaggregatorでデータをとってくる(まだ加工前)
@@ -28,7 +35,6 @@ class Company:
 		print "reading data"
 		self.yahoo_data=aggregator.get_data(self.share,self.name)
 		return self.yahoo_data
-
 
 	# target
 	# x_high:最高値の変化量
@@ -44,7 +50,9 @@ class Company:
 		N=1
 
 		print"making trainning data"
+		print self.yahoo_data["aver"]
 		size=len(self.yahoo_data["aver"])
+
 		col=size-term-k+1
 
 
@@ -62,18 +70,15 @@ class Company:
 		while (day+term)<=size:
 
 			maxaver=np.max(self.yahoo_data["aver"][day:day+term])
-			print maxaver/self.yahoo_data["aver"][day]
 
 			x_high=list(self.yahoo_data["high"][day-k:day])
 			x_low=list(self.yahoo_data["low"][day-k:day])
 			x_vol=list(self.yahoo_data["vol"][day-k:day])
 
 			self.x_yahoo_data[index]=x_high+x_low+x_vol
-			print maxaver,self.yahoo_data["aver"][day]
 			self.y_yahoo_data[index]=maxaver/self.yahoo_data["aver"][day]-1
 			#何日おきにつくるか
 			day+=N
-			print index,col
 			index+=1
 			
 			
@@ -82,49 +87,41 @@ class Company:
 
 
 	
-	def make_pickle(self,Data):
-		filename="../data/"+".pkl"
 
+	def make_pickle(self,Data):
+
+		filename="../data/"+self.name+".pkl"
 		with open("../data/"+filename,'wb') as output:
 			six.moves.cPickle.dump(Data,output,-1)
 		print 'Saving: DONE'
 
 
-
-
-		
-
 	def plot(self,filename="graph"):
-		print self.yahoo_data["aver"][0:5]
 		plt.plot(self.yahoo_data["aver"])
 		#plt.show()
 		plt.savefig(filename+".jpg")
 
 if __name__=="__main__":
-	ya=yahoo_aggregator()
+
+
+	ya=Yahoo_aggregator()
 	company_name="GOOG"
 	company=Company(company_name)
 	company.get_data(ya)
-
-	#20days one feature 
 	output=company.make_train_data(30,10,0.3)
 	company.make_pickle(output)
 	company.plot()
-	
-
-	
-	
 	print np.mean(output["target"])
 
 
-
 """
+MEMO::
+
 	import pickle
 	import six
 	GOOG= {}
 	GOOG['data'] = [0 for raw in output["target"]]
 	GOOG['target'] = [0 for raw in output["target"]]
-
 
 	for i in range(len(output["target"])):
 		data=list(output["high"][i]+output["low"][i]+output["vol"][i])
@@ -138,8 +135,4 @@ if __name__=="__main__":
 	print 'Saving: DONE'
 
 """
-
-
-
-
 
