@@ -23,7 +23,7 @@ class Yahoo_aggregator:
 		pass
 
 	def csv_check(self,name):
-	    if not os.path.exists(name):
+	    if not os.path.exists(self.DIR_NAME+name+".csv"):
 	    	print "making new csv..."
 	        self.make_csv(name,"2015-09-30")
 
@@ -54,7 +54,7 @@ class Yahoo_aggregator:
 	#obj=share.get_historical(start,now_time)
 	#csvからよみこみ
 	def get_data(self,share,name):
-		self.csv_check(self.DIR_NAME+name+".csv")			#csvの存在チェック
+		self.csv_check(name)			#csvの存在チェック
 		start=share.get_info()["start"]
 
 		f=open(self.DIR_NAME+name+".csv","r")

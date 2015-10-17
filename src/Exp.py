@@ -2,7 +2,7 @@
 from Company import Company
 from YahooAggregator import Yahoo_aggregator
 from Training import Training
-
+from 
 
 
 
@@ -22,7 +22,20 @@ class Exp:
 
 	def comploop(self):
 
+
 	def comptrain(self,company,ratio=1):
+	    dataname = "../data/AMZN.pkl"
+	    LOG_FILENAME = '../log/log.txt'
+
+	    Data = Training(dataname)
+	    Data.load()
+	    Data.setmodel()
+
+	    stime = time.clock()
+	    Data.learningloop()
+	    etime = time.clock()
+
+	    Data.writelog(stime,etime,LOG_FILENAME)
 
 
 
@@ -46,8 +59,8 @@ if __name__ = '__main__':
 	K, term,per = 30,30,0.1
 
 	cp=Company(name)
-	
-	Exp01 = Exp(complist,aglist,K,term,per)
+
+	Ex = Exp(complist,aglist,K,term,per)
 
 
 	Exp01.comptrain(Exp01.predcomp,)
