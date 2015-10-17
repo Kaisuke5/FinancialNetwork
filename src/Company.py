@@ -51,7 +51,6 @@ class Company:
 		N=1
 
 		print"making trainning data"
-		print self.yahoo_data["aver"]
 		size=len(self.yahoo_data["aver"])
 		col=size-term-k+1
 
@@ -88,7 +87,7 @@ class Company:
 
 
 	
-	def make_pickle(self,output):
+	def make_pickle(self,Data):
 		filename="../data/"+self.name+".pkl"
 
 		with open(filename,'wb') as output:
@@ -110,7 +109,7 @@ if __name__=="__main__":
 	output=company.make_train_data(30,10,0.3)
 	company.make_pickle(output)
 	company.plot()
-	print np.mean(output["target"])
+	
 
 
 
