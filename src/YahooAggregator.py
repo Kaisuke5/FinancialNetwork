@@ -13,6 +13,7 @@ Last updated:
 from yahoo_finance import Share
 import csv
 from pprint import pprint
+<<<<<<< HEAD
 import numpy as np
 
 
@@ -22,16 +23,28 @@ import os
 
 
 
+=======
+import os
+
+
+>>>>>>> 4a27ac879a0e39b00a30e30af0e0f59cf33cdbfb
 class Yahoo_aggregator:
 
 	def __init__(self):
 		self.DIR_NAME="../data/"
 		pass
 
+<<<<<<< HEAD
 	def csv_check(self,name,now_time):
 	    if not os.path.exists(self.DIR_NAME+name+".csv"):
 	    	print "making csv..."
 	    	self.make_csv(name,now_time)
+=======
+	def csv_check(self,name):
+	    if not os.path.exists(self.DIR_NAME+name+".csv"):
+	    	print "making new csv..."
+	        self.make_csv(name,"2015-09-30")
+>>>>>>> 4a27ac879a0e39b00a30e30af0e0f59cf33cdbfb
 
 	def make_csv(self,name,now_time):
 		print "making %s.csv....." %name
@@ -60,7 +73,11 @@ class Yahoo_aggregator:
 	#obj=share.get_historical(start,now_time)
 	#csvからよみこみ
 	def get_data(self,share,name):
+<<<<<<< HEAD
 		self.csv_check(name,"2015-09-30")			#csvの存在チェック
+=======
+		self.csv_check(name)			#csvの存在チェック
+>>>>>>> 4a27ac879a0e39b00a30e30af0e0f59cf33cdbfb
 		start=share.get_info()["start"]
 
 		f=open(self.DIR_NAME+name+".csv","r")
@@ -72,11 +89,15 @@ class Yahoo_aggregator:
 
 
 		obj.reverse()
+<<<<<<< HEAD
 
 		high=np.array([],dtype="float32")
 		low=np.array([],dtype="float32")
 		vol=np.array([],dtype="float32")
 		aver=np.array([],dtype="float32")
+=======
+		var_high, var_low, var_vol, aver_price=[],[],[],[]
+>>>>>>> 4a27ac879a0e39b00a30e30af0e0f59cf33cdbfb
 
 
 		before_high=float(obj[0]["High"])
@@ -105,8 +126,11 @@ class Yahoo_aggregator:
 
 
 if __name__=="__main__":
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4a27ac879a0e39b00a30e30af0e0f59cf33cdbfb
 	ya=Yahoo_aggregator()
 	ya.make_csv("GOOG","2015-09-30")
 	output=ya.get_data(Share("GOOG"),"GOOG")

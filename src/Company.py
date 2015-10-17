@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 from YahooAggregator import Yahoo_aggregator 
 import pickle
 import six
+
 import numpy as np
 import os
 
@@ -52,8 +53,8 @@ class Company:
 		print"making trainning data"
 		print self.yahoo_data["aver"]
 		size=len(self.yahoo_data["aver"])
-
 		col=size-term-k+1
+
 
 
 		#初期化 最初の時点
@@ -87,11 +88,10 @@ class Company:
 
 
 	
-
-	def make_pickle(self,Data):
-
+	def make_pickle(self,output):
 		filename="../data/"+self.name+".pkl"
-		with open("../data/"+filename,'wb') as output:
+
+		with open(filename,'wb') as output:
 			six.moves.cPickle.dump(Data,output,-1)
 		print 'Saving: DONE'
 
@@ -103,7 +103,6 @@ class Company:
 
 if __name__=="__main__":
 
-
 	ya=Yahoo_aggregator()
 	company_name="GOOG"
 	company=Company(company_name)
@@ -112,6 +111,7 @@ if __name__=="__main__":
 	company.make_pickle(output)
 	company.plot()
 	print np.mean(output["target"])
+
 
 
 """
