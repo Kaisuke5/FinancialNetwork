@@ -13,14 +13,19 @@ Last updated:
 from yahoo_finance import Share
 import csv
 from pprint import pprint
+import os
 
 
 class Yahoo_aggregator:
 
 	def __init__(self):
-		self.DIR_NAME="../data/"		# 後でdataへのシンボリックリンクを張る？
+		self.DIR_NAME="../data/"
 		pass
 
+	def csv_check(self,name):
+	    if not os.path.exists(name):
+	    	print "making new csv..."
+	        self.make_csv(name,"2015-09-30")
 
 	def make_csv(self,name,now_time):
 		print "making %s.csv....." %name
@@ -45,14 +50,12 @@ class Yahoo_aggregator:
 		f.close()
 
 
+	#yahoo_financeから
+	#obj=share.get_historical(start,now_time)
+	#csvからよみこみ
 	def get_data(self,share,name):
-
+		self.csv_check(self.DIR_NAME+name+".csv")			#csvの存在チェック
 		start=share.get_info()["start"]
-
-		#yahoo_financeから
-		#obj=share.get_historical(start,now_time)
-
-		#csvからよみこみ
 
 		f=open(self.DIR_NAME+name+".csv","r")
 		print "reading "+name+".csv"
@@ -63,11 +66,7 @@ class Yahoo_aggregator:
 
 
 		obj.reverse()
-
-		var_high=[]
-		var_low=[]
-		var_vol=[]
-		aver_price=[]
+		var_high, var_low, var_vol, aver_price=[],[],[],[]
 
 
 		before_high=float(obj[0]["High"])

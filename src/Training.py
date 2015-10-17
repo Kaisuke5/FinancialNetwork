@@ -35,7 +35,7 @@ class Training:
         self.batchsize = 100     # size of batch
         self.n_epoch = 5         # num of back prop. iteration
         self.n_units = 100       # num of units in hidden layer
-        self.n_output = 2        			# num of units in output layer
+        self.n_output = 1        			# num of units in output layer
 
         self.dropout = 0         # dropout rate
         self.train_ac,self.test_ac,self.train_mean_loss,self.test_mean_loss = [],[],[],[]
@@ -64,6 +64,7 @@ class Training:
         input_s = S_inv.dot((np.matrix(self.data - self.M)).T)
         self.data = np.array(input_s.T)
 
+
     #################################### Method #####################################
     ## Prepare dataset
     def load(self):
@@ -73,8 +74,13 @@ class Training:
         self.data = np.array(D['data'])             # to np array
         self.stdinp()                                         # standardize input
         self.data = self.data.astype(np.float32)    # 32 bit expression needed for chainer
-        self.target = np.array(D['target'])         # to np array
-        self.target = self.target.astype(np.int32)  # 32 bit expression needed for chainer
+
+        if self.n_output>1:
+            self.target = np.array(D['target'])         # to np array
+            self.target = self.target.astype(np.int32)  # 32 bit expression needed for chainer
+        else:
+            self.target = np.array(D['target'])         # to np array
+            self.target = self.target.astype(np.float32)  # 32 bit expression needed for chainer
 
         self.n_input = len(self.data[0])
 
@@ -86,12 +92,16 @@ class Training:
     #################################### Method #####################################
     ## Neural net architecture
     ## softmax and accuracy for discrimination task
-    def forward_disc(self, x_data, y_data, dropout, train=True):
+    def forward(self, x_data, y_data, dropout, train=True):
         x, t = chainer.Variable(x_data), chainer.Variable(y_data)
         h1 = F.dropout(F.sigmoid(self.model.l1(x)), ratio=dropout, train=train)
         h2 = F.dropout(F.sigmoid(self.model.l2(h1)), ratio=dropout, train=train)
-        y = self.model.l3(h2)
-        return F.softmax_cross_entropy(y, t), F.accuracy(y, t)
+        if self.n_output>1:
+            y = self.model.l3(h2)
+            return F.softmax_cross_entropy(y, t), F.accuracy(y, t)
+        else:
+            y = F.dropout(self.model.l3(h2), ratio=dropout, train=train)
+            return F.mean_squared_error(y,t)
 
     #################################### Method #####################################
     ## Train
@@ -103,13 +113,19 @@ class Training:
             x_batch = np.asarray(self.x_train[perm[i:i + self.batchsize]])
             y_batch = np.asarray(self.y_train[perm[i:i + self.batchsize]])
             self.optimizer.zero_grads()
-            loss, acc = self.forward_disc(x_batch, y_batch, self.dropout)
-            loss.backward()
-            self.optimizer.update()
-            sum_loss += float(loss.data) * len(y_batch)
-            sum_accuracy += float(acc.data) * len(y_batch)
+            if self.n_output>1:
+                loss, acc = self.forward(x_batch, y_batch, self.dropout)
+                loss.backward()
+                self.optimizer.update()
+                sum_loss += float(loss.data) * len(y_batch)
+                sum_accuracy += float(acc.data) * len(y_batch)
+            else:
+                loss = self.forward(x_batch, y_batch, self.dropout)
+                loss.backward()
+                self.optimizer.update()
+                sum_loss += float(loss.data) * len(y_batch)
         self.train_mean_loss.append(sum_loss / self.N)
-        self.train_ac.append(sum_accuracy / self.N)
+        if self.n_output>1: self.train_ac.append(sum_accuracy / self.N)
 
 
     #################################### Method #####################################
@@ -120,11 +136,15 @@ class Training:
         for i in six.moves.range(0, self.N_test, self.batchsize):
             x_batch = np.asarray(self.x_test[i:i + self.batchsize])
             y_batch = np.asarray(self.y_test[i:i + self.batchsize])
-            loss, acc = self.forward_disc(x_batch, y_batch, self.dropout, train=False)
-            sum_loss += float(loss.data) * len(y_batch)
-            sum_accuracy += float(acc.data) * len(y_batch)
+            if self.n_output>1:
+                loss, acc = self.forward(x_batch, y_batch, self.dropout, train=False)
+                sum_loss += float(loss.data) * len(y_batch)
+                sum_accuracy += float(acc.data) * len(y_batch)
+            else:
+                loss = self.forward(x_batch, y_batch, self.dropout, train=False)
+                sum_loss += float(loss.data) * len(y_batch)
         self.test_mean_loss.append(sum_loss / self.N_test)
-        self.test_ac.append(sum_accuracy / self.N_test)
+        if self.n_output>1: self.test_ac.append(sum_accuracy / self.N_test)
 
 
     #################################### Method #####################################
@@ -135,9 +155,16 @@ class Training:
             start_time = time.clock()
             if epoch > 0:
                 self.train()
-                print('train mean loss={}, accuracy={}'.format(self.train_mean_loss[-1], self.train_ac[-1]))
+                if self.n_output>1:
+                    print('train mean loss={}, accuracy={}'.format(self.train_mean_loss[-1], self.train_ac[-1]))
+                else:
+                    print('train mean loss={}'.format(self.train_mean_loss[-1]))
+
             self.test()
-            print('test  mean loss={}, accuracy={}'.format(self.test_mean_loss[-1], self.test_ac[-1]))
+            if self.n_output>1:
+                print('test  mean loss={}, accuracy={}'.format(self.test_mean_loss[-1], self.test_ac[-1]))
+            else:
+                print('test  mean loss={}'.format(self.test_mean_loss[-1]))
             end_time = time.clock()
             print "\ttime = %.3f" %(end_time-start_time)
 
@@ -153,8 +180,13 @@ class Training:
     ## Logging
     def writelog(self,stime,etime,LOG_FILENAME):
         logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, format='%(asctime)s %(message)s')
-        logging.info('New trial.\nData: %s\nAll data: %d frames, train: %d frames / test: %d frames.\n   Layers = %d, Units= %d, Batchsize = %d,  Time = %.3f,  Dropout = %.3f\n   Epoch: 0,  test mean loss=  %.5f, accuracy=  %.5f\n   Epoch: %d, train mean loss=  %.5f, accuracy=  %.5f\n              test mean loss=  %.3f, accuracy=  %.3f\n',
-                     self.dataname,self.N+self.N_test,self.N,self.N_test,self.Lay,self.n_units,self.batchsize,etime-stime,self.dropout,self.test_mean_loss[0], self.test_ac[0],self.n_epoch, self.train_mean_loss[-1], self.train_ac[-1],self.test_mean_loss[-1], self.test_ac[-1])
+
+        if self.n_output>1:            
+            logging.info('New trial: Discrimination\nData: %s\nAll data: %d frames, train: %d frames / test: %d frames.\n   Layers = %d, Units= %d, Batchsize = %d,  Time = %.3f,  Dropout = %.3f\n   Epoch: 0,  test mean loss=  %.5f, accuracy=  %.5f\n   Epoch: %d, train mean loss=  %.5f, accuracy=  %.5f\n              test mean loss=  %.3f, accuracy=  %.3f\n',
+                         self.dataname,self.N+self.N_test,self.N,self.N_test,self.Lay,self.n_units,self.batchsize,etime-stime,self.dropout,self.test_mean_loss[0], self.test_ac[0],self.n_epoch, self.train_mean_loss[-1], self.train_ac[-1],self.test_mean_loss[-1], self.test_ac[-1])
+        else:
+            logging.info('New trial: Regression\nData: %s\nAll data: %d frames, train: %d frames / test: %d frames.\n   Layers = %d, Units= %d, Batchsize = %d,  Time = %.3f,  Dropout = %.3f\n   Epoch: 0,  test mean loss=  %.5f\n   Epoch: %d, train mean loss=  %.5f\n              test mean loss=  %.3f\n',
+                         self.dataname,self.N+self.N_test,self.N,self.N_test,self.Lay,self.n_units,self.batchsize,etime-stime,self.dropout,self.test_mean_loss[0],self.n_epoch, self.train_mean_loss[-1],self.test_mean_loss[-1])
         f = open(LOG_FILENAME, 'rt')
         try:
             body = f.read()

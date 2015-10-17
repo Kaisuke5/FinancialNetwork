@@ -1,13 +1,13 @@
 from Company import Company
-from YahooAggregator import yahoo_aggregator
+from YahooAggregator import Yahoo_aggregator
 
 
 name="AMZN"
 cp=Company(name)
 
 #get data of yahoo finance from csv
-ya=yahoo_aggregator()
-cp.get_data(ya)
+Yahoo = Yahoo_aggregator()
+cp.get_data(Yahoo)
 
 
 #make train_data

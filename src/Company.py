@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 from YahooAggregator import Yahoo_aggregator 
 import pickle
 import six
+import os
 
 
 class Company:
@@ -27,12 +28,12 @@ class Company:
 		self.name=name
 		
 
+
 	#csvからaggregatorでデータをとってくる(まだ加工前)
 	def get_data(self,aggregator):
 		print "reading data"
 		self.yahoo_data=aggregator.get_data(self.share,self.name)
 		return self.yahoo_data
-
 
 	# target
 	# x_var_high:最高値の変化量
@@ -52,9 +53,7 @@ class Company:
 		
 		#print len(self.yahoo_data["aver_price"]),len(self.yahoo_data["var_low"]),len(self.yahoo_data["var_high"])
 
-		x_var_high=[]
-		x_var_low=[]
-		x_var_vol=[]
+		x_var_high, x_var_low, x_var_vol=[],[],[]
 		y_list=[]
 
 		day=k
@@ -82,7 +81,7 @@ class Company:
 
 	
 	def make_pickle(self,output):
-		filename="../data/"+".pkl"
+		filename="../data/"+self.name+".pkl"
 		Data= {}
 		Data['data'] = [0 for raw in output["target"]]
 		Data['target'] = [0 for raw in output["target"]]
@@ -99,10 +98,6 @@ class Company:
 		print 'Saving: DONE'
 
 
-
-
-		
-
 	def plot(self,filename="graph"):
 		plt.plot(self.yahoo_data["aver_price"])
 		#plt.show()
@@ -118,7 +113,6 @@ if __name__=="__main__":
 	output=company.make_train_data(30,10,0.3)
 	company.make_pickle(output)
 	
-
 	c=0
 	for i in output["target"]:
 		if i ==1: c+=1
@@ -137,7 +131,6 @@ MEMO::
 	GOOG['data'] = [0 for raw in output["target"]]
 	GOOG['target'] = [0 for raw in output["target"]]
 
-
 	for i in range(len(output["target"])):
 		data=list(output["var_high"][i]+output["var_low"][i]+output["var_vol"][i])
 		GOOG["data"][i]=data
@@ -150,8 +143,4 @@ MEMO::
 	print 'Saving: DONE'
 
 """
-
-
-
-
 

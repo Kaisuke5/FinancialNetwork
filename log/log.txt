@@ -1,0 +1,16 @@
+2015-10-17 13:35:07,794 New trial.
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 1.021,  Dropout = 0.000
+   Epoch: 0,  test mean loss=  0.89716, accuracy=  0.35816
+   Epoch: 5, train mean loss=  0.68409, accuracy=  0.54999
+              test mean loss=  0.732, accuracy=  0.364
+
+2015-10-17 14:12:19,542 New trial: Discrimination
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 1.066,  Dropout = 0.000
+   Epoch: 0,  test mean loss=  0.66463, accuracy=  0.64184
+   Epoch: 5, train mean loss=  0.68739, accuracy=  0.54862
+              test mean loss=  0.676, accuracy=  0.613
+
