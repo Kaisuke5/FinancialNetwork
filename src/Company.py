@@ -103,10 +103,10 @@ class Company:
 if __name__=="__main__":
 
 	ya=Yahoo_aggregator()
-	company_name="GOOG"
+	company_name="AMZN"
 	company=Company(company_name)
 	company.get_data(ya)
-	output=company.make_train_data(30,10,0.3)
+	output=company.make_train_data(20,100,0.3)
 	company.make_pickle(output)
 	company.plot()
 	

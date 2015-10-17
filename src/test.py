@@ -9,8 +9,9 @@ cp=Company(name)
 Yahoo = Yahoo_aggregator()
 cp.get_data(Yahoo)
 
+make train_data
+K,term,per=30,30,0.10
+output=cp.make_train_data(term,K,per)
+cp.make_pickle(output)
 
-#make train_data
-#K,term,per=30,30,0.10
-#output=cp.make_train_data(term,K,per)
-#cp.make_pickle(output)
+

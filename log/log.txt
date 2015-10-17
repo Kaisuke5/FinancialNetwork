@@ -14,3 +14,507 @@ All data: 4564 frames, train: 3651 frames / test: 913 frames.
    Epoch: 5, train mean loss=  0.68739, accuracy=  0.54862
               test mean loss=  0.676, accuracy=  0.613
 
+2015-10-17 18:01:51,706 New trial: Discrimination
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 1.050,  Dropout = 0.000
+   Epoch: 0,  test mean loss=  0.71122, accuracy=  0.36145
+   Epoch: 5, train mean loss=  0.68460, accuracy=  0.55327
+              test mean loss=  0.706, accuracy=  0.419
+
+2015-10-17 18:02:45,252 New trial: Discrimination
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.202,  Dropout = 0.000
+   Epoch: 0,  test mean loss=  0.70353, accuracy=  0.38883
+   Epoch: 20, train mean loss=  0.66739, accuracy=  0.58039
+              test mean loss=  0.728, accuracy=  0.417
+
+2015-10-17 18:59:29,836 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 0.316,  Dropout = 0.000
+   Epoch: 0,  test mean loss=  0.38330
+   Epoch: 20, train mean loss=  0.00153
+              test mean loss=  0.023
+
+2015-10-17 19:01:04,619 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 3.689,  Dropout = 0.000
+   Epoch: 0,  test mean loss=  0.50770
+   Epoch: 20, train mean loss=  0.23714
+              test mean loss=  0.275
+
+2015-10-17 19:02:54,399 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 19.130,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  1.15899
+   Epoch: 100, train mean loss=  0.27645
+              test mean loss=  0.240
+
+2015-10-17 19:16:28,461 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 2.742,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.30859
+   Epoch: 10, train mean loss=  0.31492
+              test mean loss=  0.235
+
+2015-10-17 19:17:41,358 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 2.741,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.39311
+   Epoch: 10, train mean loss=  0.31697
+              test mean loss=  0.233
+
+2015-10-17 19:18:53,923 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 2.742,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.43104
+   Epoch: 10, train mean loss=  0.31787
+              test mean loss=  0.238
+
+2015-10-17 19:22:55,191 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 0.505,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.44618
+   Epoch: 1, train mean loss=  0.41673
+              test mean loss=  0.246
+
+2015-10-17 19:28:31,171 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4564 frames, train: 3651 frames / test: 913 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 0.488,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  1.05473
+   Epoch: 1, train mean loss=  0.53196
+              test mean loss=  0.231
+
+2015-10-17 19:29:04,571 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 0.300,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.01867
+   Epoch: 1, train mean loss=  0.10868
+              test mean loss=  0.038
+
+2015-10-17 19:30:03,995 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 0.313,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.05722
+   Epoch: 1, train mean loss=  0.11338
+              test mean loss=  0.047
+
+2015-10-17 19:32:05,275 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 0.281,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.14769
+   Epoch: 1, train mean loss=  0.27921
+              test mean loss=  0.026
+
+2015-10-17 19:34:38,087 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 0.353,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.17670
+   Epoch: 1, train mean loss=  0.14116
+              test mean loss=  0.016
+
+2015-10-17 19:37:30,311 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 17.972,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.70281
+   Epoch: 100, train mean loss=  0.02283
+              test mean loss=  0.021
+
+2015-10-17 19:40:21,181 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 17.342,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.05164
+   Epoch: 100, train mean loss=  0.00735
+              test mean loss=  0.022
+
+2015-10-17 19:41:51,877 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4584 frames, train: 3667 frames / test: 917 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 28.210,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.07692
+   Epoch: 100, train mean loss=  0.04380
+              test mean loss=  0.005
+
+2015-10-17 19:46:51,466 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4584 frames, train: 3667 frames / test: 917 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 58.517,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.02512
+   Epoch: 100, train mean loss=  0.04373
+              test mean loss=  0.005
+
+2015-10-17 19:47:54,573 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4584 frames, train: 3667 frames / test: 917 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 3.507,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.12216
+   Epoch: 10, train mean loss=  0.05515
+              test mean loss=  0.006
+
+2015-10-17 19:48:50,707 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4584 frames, train: 3667 frames / test: 917 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 22.436,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.00618
+   Epoch: 50, train mean loss=  0.04945
+              test mean loss=  0.007
+
+2015-10-17 19:50:09,322 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 16.933,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.12481
+   Epoch: 50, train mean loss=  0.02442
+              test mean loss=  0.018
+
+2015-10-17 20:04:36,787 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 1.636,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.13349
+   Epoch: 50, train mean loss=  0.02572
+              test mean loss=  0.022
+
+2015-10-17 20:05:00,784 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4584 frames, train: 3667 frames / test: 917 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 9.748,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.84639
+   Epoch: 50, train mean loss=  0.04956
+              test mean loss=  0.006
+
+2015-10-17 20:06:02,918 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4584 frames, train: 3667 frames / test: 917 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 9.453,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.01090
+   Epoch: 50, train mean loss=  0.04831
+              test mean loss=  0.007
+
+2015-10-17 20:06:57,381 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4584 frames, train: 3667 frames / test: 917 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 9.578,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.88376
+   Epoch: 50, train mean loss=  0.04893
+              test mean loss=  0.008
+
+2015-10-17 20:07:36,484 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 1.325,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.01559
+   Epoch: 50, train mean loss=  0.01132
+              test mean loss=  0.023
+
+2015-10-17 20:08:38,017 New trial: Regression
+Data: ../data/GOOG.pkl
+All data: 342 frames, train: 273 frames / test: 69 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 1.321,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.03113
+   Epoch: 50, train mean loss=  0.01720
+              test mean loss=  0.025
+
+2015-10-17 20:09:01,444 New trial: Regression
+Data: ../data/FB.pkl
+All data: 807 frames, train: 645 frames / test: 162 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 2.362,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.09017
+   Epoch: 50, train mean loss=  0.02577
+              test mean loss=  0.005
+
+2015-10-17 20:10:47,372 New trial: Regression
+Data: ../data/FB.pkl
+All data: 807 frames, train: 645 frames / test: 162 frames.
+   Layers = 3, Units= 100, Batchsize = 10,  Time = 11.159,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.33571
+   Epoch: 50, train mean loss=  0.02050
+              test mean loss=  0.004
+
+2015-10-17 20:17:09,535 New trial: Regression
+Data: ../data/FB.pkl
+All data: 807 frames, train: 645 frames / test: 162 frames.
+   Layers = 3, Units= 100, Batchsize = 200,  Time = 1.777,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  1.66567
+   Epoch: 50, train mean loss=  0.06569
+              test mean loss=  0.006
+
+2015-10-17 20:18:54,023 New trial: Regression
+Data: ../data/FB.pkl
+All data: 807 frames, train: 645 frames / test: 162 frames.
+   Layers = 3, Units= 100, Batchsize = 200,  Time = 1.816,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.17134
+   Epoch: 50, train mean loss=  0.03055
+              test mean loss=  0.004
+
+2015-10-17 20:25:52,605 New trial: Regression
+Data: ../data/FB.pkl
+All data: 807 frames, train: 645 frames / test: 162 frames.
+   Layers = 3, Units= 100, Batchsize = 200,  Time = 1.804,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.14468
+   Epoch: 50, train mean loss=  0.03638
+              test mean loss=  0.003
+
+2015-10-17 20:26:11,155 New trial: Regression
+Data: ../data/FB.pkl
+All data: 807 frames, train: 645 frames / test: 162 frames.
+   Layers = 3, Units= 100, Batchsize = 200,  Time = 1.749,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.14289
+   Epoch: 50, train mean loss=  0.02849
+              test mean loss=  0.004
+
+2015-10-17 20:27:32,299 New trial: Regression
+Data: ../data/FB.pkl
+All data: 807 frames, train: 645 frames / test: 162 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 2.256,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.09941
+   Epoch: 50, train mean loss=  0.02474
+              test mean loss=  0.004
+
+2015-10-17 20:29:19,908 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4584 frames, train: 3667 frames / test: 917 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 8.994,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.23911
+   Epoch: 50, train mean loss=  0.04775
+              test mean loss=  0.007
+
+2015-10-17 20:31:44,179 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4584 frames, train: 3667 frames / test: 917 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 18.384,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  1.85687
+   Epoch: 100, train mean loss=  0.04585
+              test mean loss=  0.006
+
+2015-10-17 20:34:05,535 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4613 frames, train: 4151 frames / test: 462 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 20.000,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.32018
+   Epoch: 100, train mean loss=  0.00003
+              test mean loss=  0.000
+
+2015-10-17 20:35:03,186 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4613 frames, train: 4151 frames / test: 462 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 19.422,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.01240
+   Epoch: 100, train mean loss=  0.00001
+              test mean loss=  0.000
+
+2015-10-17 20:36:04,720 New trial: Regression
+Data: ../data/AMZN.pkl
+All data: 4613 frames, train: 4151 frames / test: 462 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 18.977,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.10391
+   Epoch: 100, train mean loss=  0.00002
+              test mean loss=  0.000
+
+2015-10-17 20:36:55,138 New trial: Regression
+Data: ../data/FB.pkl
+All data: 836 frames, train: 752 frames / test: 84 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.402,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.14022
+   Epoch: 100, train mean loss=  0.00101
+              test mean loss=  0.000
+
+2015-10-17 20:58:49,492 New trial: Regression
+Data: ../data/FB.pkl
+All data: 835 frames, train: 751 frames / test: 84 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.240,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.19641
+   Epoch: 100, train mean loss=  0.00155
+              test mean loss=  0.000
+
+2015-10-17 21:02:58,884 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 748 frames / test: 84 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.302,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.26602
+   Epoch: 100, train mean loss=  0.00321
+              test mean loss=  0.001
+
+2015-10-17 21:13:05,909 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.267,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.45979
+   Epoch: 100, train mean loss=  0.00348
+              test mean loss=  0.001
+
+2015-10-17 21:14:06,809 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.295,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.00515
+   Epoch: 100, train mean loss=  0.00220
+              test mean loss=  0.001
+
+2015-10-17 21:15:19,520 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.289,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.00284
+   Epoch: 100, train mean loss=  0.00198
+              test mean loss=  0.001
+
+2015-10-17 21:16:10,904 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.280,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.47010
+   Epoch: 100, train mean loss=  0.00347
+              test mean loss=  0.001
+
+2015-10-17 21:16:50,839 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.226,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.10540
+   Epoch: 100, train mean loss=  0.00280
+              test mean loss=  0.001
+
+2015-10-17 21:17:43,327 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.238,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.32664
+   Epoch: 100, train mean loss=  0.00321
+              test mean loss=  0.001
+
+2015-10-17 21:22:05,461 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.369,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.01008
+   Epoch: 100, train mean loss=  0.00225
+              test mean loss=  0.001
+
+2015-10-17 21:23:47,251 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.303,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.07438
+   Epoch: 100, train mean loss=  0.00239
+              test mean loss=  0.001
+
+2015-10-17 21:24:47,662 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.334,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.03608
+   Epoch: 100, train mean loss=  0.00236
+              test mean loss=  0.001
+
+2015-10-17 21:26:49,848 New trial: Regression
+Data: ../data/FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.456,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.16545
+   Epoch: 100, train mean loss=  0.00276
+              test mean loss=  0.001
+
+2015-10-17 21:42:23,851 New trial: Regression
+Data: FB.pkl
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.008,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.21885
+   Epoch: 100, train mean loss=  0.00277
+              test mean loss=  0.001
+
+2015-10-17 21:43:32,300 New trial: Regression
+Data: FB
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.007,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.45525
+   Epoch: 100, train mean loss=  0.00365
+              test mean loss=  0.001
+
+2015-10-17 21:47:19,075 New trial: Regression
+Data: FB
+All data: 832 frames, train: 790 frames / test: 42 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 4.093,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.31563
+   Epoch: 100, train mean loss=  0.00348
+              test mean loss=  0.001
+
+2015-10-17 21:48:22,695 New trial: Regression
+Data: AMZN
+All data: 4613 frames, train: 4382 frames / test: 231 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 19.194,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.01804
+   Epoch: 100, train mean loss=  0.00001
+              test mean loss=  0.000
+
+2015-10-17 21:49:48,928 New trial: Regression
+Data: GOOG
+All data: 367 frames, train: 348 frames / test: 19 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 2.239,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.01368
+   Epoch: 100, train mean loss=  0.00348
+              test mean loss=  0.000
+
+2015-10-17 21:51:49,648 New trial: Regression
+Data: GOOG
+All data: 367 frames, train: 348 frames / test: 19 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 18.931,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  1.26654
+   Epoch: 1000, train mean loss=  0.00078
+              test mean loss=  0.000
+
+2015-10-17 21:53:27,498 New trial: Regression
+Data: GOOG
+All data: 352 frames, train: 334 frames / test: 18 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 18.912,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.16184
+   Epoch: 1000, train mean loss=  0.00362
+              test mean loss=  0.001
+
+2015-10-17 21:54:43,635 New trial: Regression
+Data: GOOG
+All data: 352 frames, train: 334 frames / test: 18 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 9.753,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.02590
+   Epoch: 500, train mean loss=  0.00366
+              test mean loss=  0.001
+
+2015-10-17 21:55:27,923 New trial: Regression
+Data: GOOG
+All data: 352 frames, train: 334 frames / test: 18 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 2.207,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.03429
+   Epoch: 100, train mean loss=  0.00715
+              test mean loss=  0.001
+
+2015-10-17 21:58:05,097 New trial: Regression
+Data: GOOG
+All data: 262 frames, train: 248 frames / test: 14 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 2.101,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.06401
+   Epoch: 100, train mean loss=  0.00970
+              test mean loss=  0.002
+
+2015-10-17 22:03:13,958 New trial: Regression
+Data: AMZN
+All data: 4504 frames, train: 4278 frames / test: 226 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 24.834,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.25088
+   Epoch: 100, train mean loss=  0.01221
+              test mean loss=  0.009
+

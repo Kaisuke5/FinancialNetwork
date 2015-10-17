@@ -1,42 +1,43 @@
-
 from Company import Company
 from YahooAggregator import Yahoo_aggregator
 from Training import Training
-from 
 
 
+class Exp(Training):
 
-
-class Exp:
-
-
-
-	def __init__(self, complist, aglist, K, term, per):
+	def __init__(self, complist, prodlist, K, term, per):
+		self.DIR_NAME = "../data/"
 		self.predcomp = complist.keys()[0]
 		self.datacomp = complist.keys()
-		self.aglist = aglist
+		self.prodlist = prodlist
 		self.K = K
 		self.term = term
 		self.per = per
 
-
-	def comploop(self):
-
-
 	def comptrain(self,company,ratio=1):
-	    dataname = "../data/AMZN.pkl"
+	    dataname = self.DIR_NAME+company+".pkl"
 	    LOG_FILENAME = '../log/log.txt'
 
-	    Data = Training(dataname)
-	    Data.load()
-	    Data.setmodel()
+		cp=Company(company)
+		#get data of yahoo finance from csv
+		Yahoo = Yahoo_aggregator()
+		cp.get_data(Yahoo)
+		#cp.get_data(Twitter)
 
+		output=cp.make_train_data(self.prodlist,self.term,self.K,self.per)
+		cp.make_pickle(output)
+
+		data = cp.make_train_data()
+
+		if hasattr(self,"model"):
+		    Tr = Training(data,epoch=20,n_output=2,Model=self.model)
+		else:
+		    Tr = Training(data,epoch=20,n_output=2,Model=None)
 	    stime = time.clock()
-	    Data.learningloop()
+	    Tr.learningloop()
 	    etime = time.clock()
-
-	    Data.writelog(stime,etime,LOG_FILENAME)
-
+	    Tr.writelog(stime,etime,LOG_FILENAME)
+	    self.model = Tr.model
 
 
 n回 メインの会社
@@ -55,7 +56,7 @@ complistの1tつめをたーげっととして
 
 if __name__ = '__main__':
 	complist = {"GOOG":1, "AMZN":0.5}
-	aglist = ["Y","T"]
+	prodlist = ["Y","T"]
 	K, term,per = 30,30,0.1
 
 	cp=Company(name)
