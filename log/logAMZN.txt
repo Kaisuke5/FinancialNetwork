@@ -22,3 +22,11 @@ All data: 4504 frames, train: 4278 frames / test: 226 frames.
    Epoch: 1, train mean loss=  0.11138
               test mean loss=  0.011
 
+2015-10-18 00:29:51,270 New trial: Regression
+Data: AMZN
+All data: 4504 frames, train: 4278 frames / test: 226 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 14.327,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.00932
+   Epoch: 50, train mean loss=  0.01389
+              test mean loss=  0.008
+

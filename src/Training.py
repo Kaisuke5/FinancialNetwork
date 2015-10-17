@@ -162,17 +162,17 @@ class Training(DataUtilFunc):
 
             # test
             self.test()
-
+            
             # discrimination or regression
             if self.n_output>1:
-		        self.acc_plot(self.train_ac,self.test_ac[1:],self.compname)
                 print('test  mean loss={}, accuracy={}'.format(self.test_mean_loss[-1], self.test_ac[-1]))
+                self.acc_plot(self.train_ac,self.test_ac[1:],self.compname)
             else:
-	            self.regression_acc_plot(self.T,self.Y,epoch,self.compname)
             	print('test  mean loss={}'.format(self.test_mean_loss[-1]))
+            	self.regression_acc_plot(self.T,self.Y,epoch,self.compname)
 
         self.meanloss_plot(self.train_mean_loss,self.test_mean_loss[1:],self.compname)
-
+        if self.n_output==1: self.train_ac, self.test_ac = 0,0
 
 
 
@@ -180,14 +180,13 @@ if __name__=="__main__":
 
     compname = "AMZN"
 
-    Data = Training(compname,epoch=1,n_output=1)
+    Data = Training(compname,epoch=50,n_output=1)
 
     stime = time.clock()
     Data.learningloop()
     etime = time.clock()
 
-    if Data.n_output==1:
-    	Data.train_ac, Data.test_ac = 0,0
+
     Data.writelog(stime,etime,compname,Data.N,Data.N_test,Data.Lay,Data.n_units,Data.n_output,
     	Data.n_epoch,Data.batchsize,Data.dropout,Data.train_mean_loss,Data.test_mean_loss,Data.train_ac,Data.test_ac)
 

@@ -50,18 +50,18 @@ class DataUtilFunc:
     ## Logging
     def writelog(self,stime,etime,compname,N,N_test,Lay,n_units,n_output,n_epoch,batchsize,dropout,train_ml,test_ml,train_ac,test_ac):
 		LOG_FILENAME = '../log/log'+compname+'.txt'
-	        logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, format='%(asctime)s %(message)s')
-	        if n_output>1:            
-	            logging.info('New trial: Discrimination\nData: %s\nAll data: %d frames, train: %d frames / test: %d frames.\n   Layers = %d, Units= %d, Batchsize = %d,  Time = %.3f,  Dropout = %.3f\n   Epoch: 0,  test mean loss=  %.5f, accuracy=  %.5f\n   Epoch: %d, train mean loss=  %.5f, accuracy=  %.5f\n              test mean loss=  %.3f, accuracy=  %.3f\n',
-	                         compname,N+N_test,N,N_test,Lay,n_units,batchsize,etime-stime,dropout,test_ml[0], test_ac[0],n_epoch, train_ml[-1], train_ac[-1],test_ml[-1], test_ac[-1])
-	        else:
-	            logging.info('New trial: Regression\nData: %s\nAll data: %d frames, train: %d frames / test: %d frames.\n   Layers = %d, Units= %d, Batchsize = %d,  Time = %.3f,  Dropout = %.3f\n   Epoch: 0,  test mean loss=  %.5f\n   Epoch: %d, train mean loss=  %.5f\n              test mean loss=  %.3f\n',
-	                         compname,N+N_test,N,N_test,Lay,n_units,batchsize,etime-stime,dropout,test_ml[0],n_epoch, train_ml[-1],test_ml[-1])
-	        f = open(LOG_FILENAME, 'rt')
-	        try:
-	            body = f.read()
-	        finally:
-	            f.close()
+		logging.basicConfig(filename=LOG_FILENAME, level=logging.DEBUG, format='%(asctime)s %(message)s')
+		if n_output>1:            
+		    logging.info('New trial: Discrimination\nData: %s\nAll data: %d frames, train: %d frames / test: %d frames.\n   Layers = %d, Units= %d, Batchsize = %d,  Time = %.3f,  Dropout = %.3f\n   Epoch: 0,  test mean loss=  %.5f, accuracy=  %.5f\n   Epoch: %d, train mean loss=  %.5f, accuracy=  %.5f\n              test mean loss=  %.3f, accuracy=  %.3f\n',
+		                 compname,N+N_test,N,N_test,Lay,n_units,batchsize,etime-stime,dropout,test_ml[0], test_ac[0],n_epoch, train_ml[-1], train_ac[-1],test_ml[-1], test_ac[-1])
+		else:
+		    logging.info('New trial: Regression\nData: %s\nAll data: %d frames, train: %d frames / test: %d frames.\n   Layers = %d, Units= %d, Batchsize = %d,  Time = %.3f,  Dropout = %.3f\n   Epoch: 0,  test mean loss=  %.5f\n   Epoch: %d, train mean loss=  %.5f\n              test mean loss=  %.3f\n',
+		                 compname,N+N_test,N,N_test,Lay,n_units,batchsize,etime-stime,dropout,test_ml[0],n_epoch, train_ml[-1],test_ml[-1])
+		f = open(LOG_FILENAME, 'rt')
+		try:
+		    body = f.read()
+		finally:
+		    f.close()
 
 
 	## save model
