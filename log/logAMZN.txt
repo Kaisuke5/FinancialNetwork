@@ -1,0 +1,24 @@
+2015-10-18 00:05:08,805 New trial: Regression
+Data: AMZN
+All data: 4504 frames, train: 4278 frames / test: 226 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 0.597,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.07022
+   Epoch: 1, train mean loss=  0.09975
+              test mean loss=  0.010
+
+2015-10-18 00:05:38,477 New trial: Regression
+Data: AMZN
+All data: 4504 frames, train: 4278 frames / test: 226 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 0.769,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.41064
+   Epoch: 1, train mean loss=  0.13138
+              test mean loss=  0.009
+
+2015-10-18 00:10:44,289 New trial: Regression
+Data: AMZN
+All data: 4504 frames, train: 4278 frames / test: 226 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 0.561,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.07316
+   Epoch: 1, train mean loss=  0.11138
+              test mean loss=  0.011
+
