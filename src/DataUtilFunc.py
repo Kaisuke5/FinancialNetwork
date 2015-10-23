@@ -23,7 +23,7 @@ class DataUtilFunc:
 
     ## Plot func
     def regression_acc_plot(self,target,predict,epoch,compname):
-        filename=compname+"_acc_refression"+".jpg"
+        filename=compname+"_acc_regression"+".jpg"
         if epoch==0:
             plt.plot(target,"b")                         
         elif epoch==epoch/10:
@@ -33,6 +33,13 @@ class DataUtilFunc:
             plt.savefig(filename)
             plt.close()
 
+
+    def regressio_plot(self):
+        filename=compname+"_regression"+".jpg"
+
+
+
+
     def acc_plot(self,train,test,compname):
         filename=compname+"_acc"+".jpg"
         plt.plot(train,"b")
@@ -40,12 +47,14 @@ class DataUtilFunc:
         plt.savefig(filename)
         plt.close()
 
+
     def meanloss_plot(self,train,test,compname):
         filename=compname+"_meanloss"+".jpg"
         plt.plot(train,"b")
         plt.plot(test,"r")
         plt.savefig(filename)
         plt.close()
+
 
     ## Logging
     def writelog(self,stime,etime,compname,N,N_test,Lay,n_units,n_output,n_epoch,batchsize,dropout,train_ml,test_ml,train_ac,test_ac):

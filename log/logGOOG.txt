@@ -1,0 +1,16 @@
+2015-10-24 00:50:27,029 New trial: Regression
+Data: GOOG
+All data: 362 frames, train: 343 frames / test: 19 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 1.307,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.04793
+   Epoch: 50, train mean loss=  0.01086
+              test mean loss=  0.001
+
+2015-10-24 01:09:11,219 New trial: Regression
+Data: GOOG
+All data: 362 frames, train: 343 frames / test: 19 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 1.276,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  1.18617
+   Epoch: 50, train mean loss=  0.04040
+              test mean loss=  0.001
+

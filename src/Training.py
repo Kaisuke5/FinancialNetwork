@@ -58,7 +58,6 @@ class Training(DataUtilFunc):
 
     ## Prepare dataset
     def load(self):
-
     	## data loading
         if type(self.compname)==str:
             print('load dataset pkl file')
@@ -69,12 +68,9 @@ class Training(DataUtilFunc):
         self.data, self.M, self.Sd = self.stdinp(self.data)                 # standardize input
         self.data = self.data.astype(np.float32)    						# 32 bit expression needed for chainer
 
-        # discrimination or regression
-        if self.n_output>1:														
-            self.target = np.array(D['target']).astype(np.int32)         	# discrimination task
-        else:
-            self.target = np.array(D['target'])         					# regression task
-            self.target = self.target.astype(np.float32).reshape(len(self.target), 1)  # 32 bit expression needed for chainer
+        # regression
+        self.target = np.array(D['target'])         					# regression task
+        self.target = self.target.astype(np.float32).reshape(len(self.target), 1)  # 32 bit expression needed for chainer
         self.n_input = len(self.data[0])
 
 		## split data into two subsets: for training and test
@@ -92,14 +88,10 @@ class Training(DataUtilFunc):
         h2 = F.dropout(F.sigmoid(self.model.l2(h1)), ratio=dropout, train=train)
 
 	    ## softmax and accuracy for discrimination, mse for regression
-        if self.n_output>1:
-            y = self.model.l3(h2)
-            return F.softmax_cross_entropy(y, t), F.accuracy(y, t)
-        else:
-            y = F.dropout(self.model.l3(h2), ratio=dropout, train=train)
-            return F.mean_squared_error(y,t), t.data, y.data, y_data
+        y = F.dropout(self.model.l3(h2), ratio=dropout, train=train)
+        return F.mean_squared_error(y,t), t.data, y.data, y_data
 
-        
+
     ## Train
     def train(self):
         perm = np.random.permutation(self.N)
@@ -111,38 +103,22 @@ class Training(DataUtilFunc):
             y_batch = np.asarray(self.y_train[perm[i:i + self.batchsize]])
             self.optimizer.zero_grads()
 
-            # discrimination or regression
-            if self.n_output>1:
-                loss, acc = self.forward(x_batch, y_batch, self.dropout)
-                loss.backward()
-                self.optimizer.update()
-                sum_loss += float(loss.data) * len(y_batch)
-                sum_accuracy += float(acc.data) * len(y_batch)
-            else:
-                loss, self.T, self.Y, self.Y_data= self.forward(x_batch, y_batch, self.dropout)
-                loss.backward()
-                self.optimizer.update()
-                sum_loss += float(loss.data) * len(y_batch)
+            loss, self.T, self.Y, self.Y_data= self.forward(x_batch, y_batch, self.dropout)
+            loss.backward()
+            self.optimizer.update()
+            sum_loss += float(loss.data) * len(y_batch)
 
         self.train_mean_loss.append(sum_loss / self.N)
-        if self.n_output>1: self.train_ac.append(sum_accuracy / self.N)		# only discrimination
 
 
     ## Test
     def test(self):
         sum_accuracy, sum_loss = 0,0
 
-        # discrimination or regression
-        if self.n_output>1:
-            loss, acc = self.forward(self.x_test, self.y_test, self.dropout, train=False)
-            sum_loss += float(loss.data) * len(self.y_test)
-            sum_accuracy += float(acc.data) * len(self.y_test)
-        else:
-            loss, self.T, self.Y, self.Y_data= self.forward(self.x_test, self.y_test, self.dropout, train=False)
-            sum_loss += float(loss.data) * len(self.y_test)
+        loss, self.T, self.Y, self.Y_data= self.forward(self.x_test, self.y_test, self.dropout, train=False)
+        sum_loss += float(loss.data) * len(self.y_test)
 
         self.test_mean_loss.append(sum_loss / self.N_test)
-        if self.n_output>1: self.test_ac.append(sum_accuracy / self.N_test)		# only discrimination
 
 
     ## Learning loop, including training and test
@@ -153,39 +129,26 @@ class Training(DataUtilFunc):
             # training
             if epoch > 0:
                 self.train()
-
-                # discrimination or regression
-                if self.n_output>1:
-                    print('train mean loss={}, accuracy={}'.format(self.train_mean_loss[-1], self.train_ac[-1]))
-                else:
-                	print('train mean loss={}'.format(self.train_mean_loss[-1]))
+            	print('train mean loss={}'.format(self.train_mean_loss[-1]))
 
             # test
             self.test()
-            
-            # discrimination or regression
-            if self.n_output>1:
-                print('test  mean loss={}, accuracy={}'.format(self.test_mean_loss[-1], self.test_ac[-1]))
-                self.acc_plot(self.train_ac,self.test_ac[1:],self.compname)
-            else:
-            	print('test  mean loss={}'.format(self.test_mean_loss[-1]))
-            	self.regression_acc_plot(self.T,self.Y,epoch,self.compname)
+            print('test  mean loss={}'.format(self.test_mean_loss[-1]))
+            self.regression_acc_plot(self.T,self.Y,epoch,self.compname)
 
         self.meanloss_plot(self.train_mean_loss,self.test_mean_loss[1:],self.compname)
-        if self.n_output==1: self.train_ac, self.test_ac = 0,0
 
 
 
 if __name__=="__main__":
 
-    compname = "AMZN"
+    compname = "GOOG"
 
     Data = Training(compname,epoch=50,n_output=1)
 
     stime = time.clock()
     Data.learningloop()
     etime = time.clock()
-
 
     Data.writelog(stime,etime,compname,Data.N,Data.N_test,Data.Lay,Data.n_units,Data.n_output,
     	Data.n_epoch,Data.batchsize,Data.dropout,Data.train_mean_loss,Data.test_mean_loss,Data.train_ac,Data.test_ac)
@@ -228,5 +191,105 @@ if __name__=="__main__":
     Data.writelog(stime,etime,LOG_FILENAME)
 
 """
+
+
+
+
+
+"""
+
+    #################################### Method #####################################
+    ## Neural net architecture
+    def forward(self, x_data, y_data, dropout, train=True):
+        x, t = chainer.Variable(x_data), chainer.Variable(y_data)
+        h1 = F.dropout(F.sigmoid(self.model.l1(x)), ratio=dropout, train=train)
+        h2 = F.dropout(F.sigmoid(self.model.l2(h1)), ratio=dropout, train=train)
+
+        ## softmax and accuracy for discrimination, mse for regression
+        if self.n_output>1:
+            y = self.model.l3(h2)
+            return F.softmax_cross_entropy(y, t), F.accuracy(y, t)
+        else:
+            y = F.dropout(self.model.l3(h2), ratio=dropout, train=train)
+            return F.mean_squared_error(y,t), t.data, y.data, y_data
+
+
+    ## Train
+    def train(self):
+        perm = np.random.permutation(self.N)
+        sum_accuracy, sum_loss = 0,0
+
+        # batch loop        
+        for i in six.moves.range(0, self.N, self.batchsize): 
+            x_batch = np.asarray(self.x_train[perm[i:i + self.batchsize]])
+            y_batch = np.asarray(self.y_train[perm[i:i + self.batchsize]])
+            self.optimizer.zero_grads()
+
+            # discrimination or regression
+            if self.n_output>1:
+                loss, acc = self.forward(x_batch, y_batch, self.dropout)
+                loss.backward()
+                self.optimizer.update()
+                sum_loss += float(loss.data) * len(y_batch)
+                sum_accuracy += float(acc.data) * len(y_batch)
+            else:
+                loss, self.T, self.Y, self.Y_data= self.forward(x_batch, y_batch, self.dropout)
+                loss.backward()
+                self.optimizer.update()
+                sum_loss += float(loss.data) * len(y_batch)
+
+        self.train_mean_loss.append(sum_loss / self.N)
+        if self.n_output>1: self.train_ac.append(sum_accuracy / self.N)     # only discrimination
+
+
+    ## Test
+    def test(self):
+        sum_accuracy, sum_loss = 0,0
+
+        # discrimination or regression
+        if self.n_output>1:
+            loss, acc = self.forward(self.x_test, self.y_test, self.dropout, train=False)
+            sum_loss += float(loss.data) * len(self.y_test)
+            sum_accuracy += float(acc.data) * len(self.y_test)
+        else:
+            loss, self.T, self.Y, self.Y_data= self.forward(self.x_test, self.y_test, self.dropout, train=False)
+            sum_loss += float(loss.data) * len(self.y_test)
+
+        self.test_mean_loss.append(sum_loss / self.N_test)
+        if self.n_output>1: self.test_ac.append(sum_accuracy / self.N_test)     # only discrimination
+
+
+    ## Learning loop, including training and test
+    def learningloop(self):
+        for epoch in six.moves.range(0, self.n_epoch + 1):
+            print('epoch', epoch)
+
+            # training
+            if epoch > 0:
+                self.train()
+
+                # discrimination or regression
+                if self.n_output>1:
+                    print('train mean loss={}, accuracy={}'.format(self.train_mean_loss[-1], self.train_ac[-1]))
+                else:
+                    print('train mean loss={}'.format(self.train_mean_loss[-1]))
+
+            # test
+            self.test()
+
+            # discrimination or regression
+            if self.n_output>1:
+                print('test  mean loss={}, accuracy={}'.format(self.test_mean_loss[-1], self.test_ac[-1]))
+                self.acc_plot(self.train_ac,self.test_ac[1:],self.compname)
+            else:
+                print('test  mean loss={}'.format(self.test_mean_loss[-1]))
+                self.regression_acc_plot(self.T,self.Y,epoch,self.compname)
+
+        self.meanloss_plot(self.train_mean_loss,self.test_mean_loss[1:],self.compname)
+        if self.n_output==1: self.train_ac, self.test_ac = 0,0
+
+"""
+
+
 
 
