@@ -64,6 +64,7 @@ class Training(DataUtilFunc):
             with open(self.datadir+self.compname+".pkl", 'rb') as D_pickle:
                 D = six.moves.cPickle.load(D_pickle)
         else: D = self.compname.copy
+
         self.data = np.array(D['data'])             						# to np array
         self.data, self.M, self.Sd = self.stdinp(self.data)                 # standardize input
         self.data = self.data.astype(np.float32)    						# 32 bit expression needed for chainer
@@ -141,10 +142,9 @@ class Training(DataUtilFunc):
 
 
 if __name__=="__main__":
-
     compname = "GOOG"
+    Data = Training(compname,epoch=50)
 
-    Data = Training(compname,epoch=50,n_output=1)
 
     stime = time.clock()
     Data.learningloop()
@@ -197,6 +197,9 @@ if __name__=="__main__":
 
 
 """
+
+    # If discrimination needed::
+
 
     #################################### Method #####################################
     ## Neural net architecture

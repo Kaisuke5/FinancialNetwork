@@ -45,7 +45,6 @@ class DataProducer(CsvHandler):
 	# x_low:最高値の変化量
 	# x_vol:取引量
 
-
 	def make_datemap(self,term,k):
 		#何日おきにつくるか
 		print"making datemap csv..."
