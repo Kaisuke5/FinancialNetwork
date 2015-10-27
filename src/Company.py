@@ -103,7 +103,7 @@ class Company:
 if __name__=="__main__":
 
 	ya=Yahoo_aggregator()
-	company_name="AMZN"
+	company_name="AAPL"
 	company=Company(company_name)
 	company.get_data(ya)
 	output=company.make_train_data(20,100,0.3)

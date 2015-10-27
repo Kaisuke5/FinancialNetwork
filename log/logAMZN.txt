@@ -30,3 +30,43 @@ All data: 4504 frames, train: 4278 frames / test: 226 frames.
    Epoch: 50, train mean loss=  0.01389
               test mean loss=  0.008
 
+2015-10-18 00:32:53,172 New trial: Regression
+Data: AMZN
+All data: 4504 frames, train: 4278 frames / test: 226 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 11.512,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.61393
+   Epoch: 50, train mean loss=  0.01675
+              test mean loss=  0.008
+
+2015-10-18 18:11:09,993 New trial: Regression
+Data: AMZN
+All data: 4504 frames, train: 4278 frames / test: 226 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 11.855,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.15301
+   Epoch: 50, train mean loss=  0.01814
+              test mean loss=  0.008
+
+2015-10-18 18:14:27,190 New trial: Regression
+Data: AMZN
+All data: 4504 frames, train: 4278 frames / test: 226 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 12.750,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.12698
+   Epoch: 50, train mean loss=  0.01480
+              test mean loss=  0.008
+
+2015-10-19 11:46:55,239 New trial: Regression
+Data: AMZN
+All data: 4504 frames, train: 4278 frames / test: 226 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 11.579,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.46188
+   Epoch: 50, train mean loss=  0.01782
+              test mean loss=  0.008
+
+2015-10-23 13:36:30,984 New trial: Regression
+Data: AMZN
+All data: 4504 frames, train: 4278 frames / test: 226 frames.
+   Layers = 3, Units= 100, Batchsize = 100,  Time = 11.434,  Dropout = 0.200
+   Epoch: 0,  test mean loss=  0.55500
+   Epoch: 50, train mean loss=  0.01861
+              test mean loss=  0.008
+

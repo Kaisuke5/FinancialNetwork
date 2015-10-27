@@ -21,7 +21,7 @@ from chainer import cuda
 import chainer.functions as F
 from chainer import optimizers
 from DataUtilFunc import DataUtilFunc
-
+import sys
 
 class Training(DataUtilFunc):
     """ Training """
@@ -82,12 +82,14 @@ class Training(DataUtilFunc):
         self.x_train, self.x_test = np.split(self.data,   [self.N])
         self.y_train, self.y_test = np.split(self.target, [self.N])
         self.N_test = self.y_test.size
-
+        
 
     #################################### Method #####################################
     ## Neural net architecture
     def forward(self, x_data, y_data, dropout, train=True):
         x, t = chainer.Variable(x_data), chainer.Variable(y_data)
+    
+        
         h1 = F.dropout(F.sigmoid(self.model.l1(x)), ratio=dropout, train=train)
         h2 = F.dropout(F.sigmoid(self.model.l2(h1)), ratio=dropout, train=train)
 
@@ -178,7 +180,7 @@ class Training(DataUtilFunc):
 
 if __name__=="__main__":
 
-    compname = "AMZN"
+    compname = "AAPL"
 
     Data = Training(compname,epoch=50,n_output=1)
 
