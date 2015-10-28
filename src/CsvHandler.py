@@ -12,6 +12,7 @@ class CsvHandler:
 		self.name = name
 		self.now_time = now_time
 		self.DIR_NAME="../data/"
+		print self.DIR_NAME
 		pass
 
 	def csv_check(self,name,now_time):

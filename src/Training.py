@@ -144,9 +144,9 @@ class Training(DataUtilFunc):
 
 
 if __name__=="__main__":
-    compname = "GOOG"
+    compname = "FB"
     Data = Training(compname,epoch=50)
-    compname = "AAPL"
+    compname = "FB"
 
     Data = Training(compname,epoch=50,n_output=1)
 

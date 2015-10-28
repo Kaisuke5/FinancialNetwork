@@ -27,11 +27,11 @@ class Yahoo_aggregator(DataProducer):
 if __name__=="__main__":
 
 	ya=Yahoo_aggregator()
-	ya.make_csv("AAPL","2015-09-30")
+	#ya.make_csv("AAPL","2015-09-30")
 	ya.make_csv("FB","2015-09-30")
-	ya.make_csv("AMZN","2015-09-30")
-	ya.make_csv("MSFT","2015-09-30")
-	ya.make_datemap("GOOG")
+	#ya.make_csv("AMZN","2015-09-30")
+	#ya.make_csv("MSFT","2015-09-30")
+	#ya.make_datemap("GOOG")
 
 #	ya.make_csv("GOOG","2015-09-30")
 	output=ya.get_data("GOOG")
