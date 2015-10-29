@@ -20,8 +20,14 @@ class CsvHandler:
 	def make_csv(self,name,now_time):
 		print "making %s.csv....." %name
 		from yahoo_finance import Share
-		share=Share(name)		
-		start=share.get_info()["start"]		
+		share=Share(name)
+
+		info=share.get_info()		
+		if "start" not in info:
+			print "Cant make a %s.csv"%name
+			return -1
+		start=info["start"]		
+		
 		obj=share.get_historical(start,now_time)
 		
 		filename=name+".csv"
