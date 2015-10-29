@@ -8,11 +8,9 @@ import os
 
 class CsvHandler:
 
-	def __init__(self,name,now_time):
-		self.name = name
-		self.now_time = now_time
+	def __init__(self):
 		self.DIR_NAME="../data/"
-		print self.DIR_NAME
+		print "save path:",self.DIR_NAME
 		pass
 
 	def csv_check(self,name,now_time):
