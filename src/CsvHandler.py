@@ -18,6 +18,9 @@ class CsvHandler:
 	    	self.make_csv(name,now_time)
 
 	def make_csv(self,name,now_time):
+		if os.path.exists(self.DIR_NAME+name+".csv"):
+			print "Already have a %s.csv"%name
+			return
 		print "making %s.csv....." %name
 		from yahoo_finance import Share
 		share=Share(name)
