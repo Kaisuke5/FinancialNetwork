@@ -28,9 +28,12 @@ print companys
 
 
 for company in companys:
-	try:
-	    C.make_csv(company,DATE)
-	except socket_error as serr:
-			print "sleeping"
-			time.sleep(sleep_time)
-			continue
+	
+	while True:
+		try:
+		    C.make_csv(company,DATE)
+		    break
+		except socket_error as serr:
+				print "sleeping"
+				time.sleep(sleep_time)
+				continue
