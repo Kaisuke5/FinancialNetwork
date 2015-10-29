@@ -13,7 +13,7 @@ NUM=10
 
 count=0
 companys=[]
-for line in open("../data/companylist.csv","r"):
+for line in open("../source/companylist.csv","r"):
 	if count==0: pass
 	elif count>NUM:break
 	else:
