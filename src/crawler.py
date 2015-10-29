@@ -8,7 +8,7 @@ C=CsvHandler.CsvHandler()
 DATE="2015-10-28"
 companys=["FB","GOOG"]
 sleep_time=60
-NUM=3
+NUM=10
 
 
 count=0
@@ -33,4 +33,4 @@ for company in companys:
 	except socket_error as serr:
 			print "sleeping"
 			time.sleep(sleep_time)
-			C.make_csv(company,DATE)
+			continue
