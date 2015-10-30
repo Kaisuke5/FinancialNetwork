@@ -3,12 +3,13 @@ import csv
 from pprint import pprint
 import numpy as np
 import os
+import re
 
 
 
 class CsvHandler:
 
-	def __init__(self,name,now_time):
+	def __init__(self):
 		self.DIR_NAME="../data/"
 		print "save path:",self.DIR_NAME
 		pass
@@ -21,6 +22,7 @@ class CsvHandler:
 		if os.path.exists(self.DIR_NAME+name+".csv"):
 			print "Already have a %s.csv"%name
 			return
+
 		print "making %s.csv....." %name
 		from yahoo_finance import Share
 		share=Share(name)
@@ -29,7 +31,13 @@ class CsvHandler:
 		if "start" not in info:
 			print "Cant make a %s.csv"%name
 			return -1
-		start=info["start"]		
+		
+		start=info["start"]	
+		
+		#wrong date
+		if re.match("\d{4}-\d{2}-\d{2}",start)== None:
+			print "invalid date cant make a file"
+			return -1
 		
 		obj=share.get_historical(start,now_time)
 		
