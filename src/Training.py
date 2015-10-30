@@ -25,11 +25,12 @@ import sys
 
 
 
-class Training(DataUtilFunc):
+class Training:
     """ Training """
 
     ## Set hyperparameters
     def __init__(self,compname,epoch=20,n_output=1,Model=None):
+        self.UFunc = DataUtilFunc()
         self.datadir = "../data/"
         self.compname = compname
         self.n_epoch = epoch         # num of back prop. iteration
@@ -68,7 +69,7 @@ class Training(DataUtilFunc):
         else: D = self.compname.copy
 
         self.data = np.array(D['data'])             						# to np array
-        self.data, self.M, self.Sd = self.stdinp(self.data)                 # standardize input
+        self.data, self.M, self.Sd = self.UFunc.stdinp(self.data)                 # standardize input
         self.data = self.data.astype(np.float32)    						# 32 bit expression needed for chainer
 
         # regression
@@ -139,9 +140,9 @@ class Training(DataUtilFunc):
             # test
             self.test()
             print('test  mean loss={}'.format(self.test_mean_loss[-1]))
-            self.regression_acc_plot(self.T,self.Y,epoch,self.compname)
+            self.UFunc.regression_acc_plot(self.T,self.Y,epoch,self.n_epoch,self.compname)
 
-        self.meanloss_plot(self.train_mean_loss,self.test_mean_loss[1:],self.compname)
+        self.UFunc.meanloss_plot(self.train_mean_loss,self.test_mean_loss[1:],self.compname)
 
 
 
@@ -156,8 +157,8 @@ if __name__=="__main__":
     Data.learningloop()
     etime = time.clock()
 
-    Data.writelog(stime,etime,compname,Data.N,Data.N_test,Data.Lay,Data.n_units,Data.n_output,
-    	Data.n_epoch,Data.batchsize,Data.dropout,Data.train_mean_loss,Data.test_mean_loss,Data.train_ac,Data.test_ac)
+#    Data.UFunc.writelog(stime,etime,compname,Data.N,Data.N_test,Data.Lay,Data.n_units,Data.n_output,
+#    	Data.n_epoch,Data.batchsize,Data.dropout,Data.train_mean_loss,Data.test_mean_loss,Data.train_ac,Data.test_ac)
 
 
 

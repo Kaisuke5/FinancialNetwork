@@ -8,7 +8,7 @@ import os
 
 class CsvHandler:
 
-	def __init__(self):
+	def __init__(self,name,now_time):
 		self.DIR_NAME="../data/"
 		print "save path:",self.DIR_NAME
 		pass

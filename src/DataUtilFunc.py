@@ -8,6 +8,11 @@ import logging, time
 
 class DataUtilFunc:
 
+    def __init__(self):
+        self.DIR_NAME="../graph/"
+        print "save path:",self.DIR_NAME
+        pass
+
     ## Data standardization (only input side)
     def stdinp(self,input):
         M = np.mean(input,axis=0)
@@ -21,15 +26,15 @@ class DataUtilFunc:
         return input_s, M, Sd
 
     ## Plot func
-    def regression_acc_plot(self,target,predict,epoch,compname):
+    def regression_acc_plot(self,target,predict,epoch,n_epoch,compname):
         filename=compname+"_acc_regression"+".jpg"
         if epoch==0:
             plt.plot(target,"b")                         
-        elif epoch==epoch/10:
+        elif epoch==n_epoch/10:
             plt.plot(predict,"r")
-        elif epoch==self.n_epoch:
+        elif epoch==n_epoch:
             plt.plot(predict,"g")
-            plt.savefig(filename)
+            plt.savefig(self.DIR_NAME+filename)
             plt.close()
 
 
@@ -42,7 +47,7 @@ class DataUtilFunc:
         filename=compname+"_acc"+".jpg"
         plt.plot(train,"b")
         plt.plot(test,"r")
-        plt.savefig(filename)
+        plt.savefig(self.DIR_NAME+filename)
         plt.close()
 
 
@@ -50,7 +55,7 @@ class DataUtilFunc:
         filename=compname+"_meanloss"+".jpg"
         plt.plot(train,"b")
         plt.plot(test,"r")
-        plt.savefig(filename)
+        plt.savefig(self.DIR_NAME+filename)
         plt.close()
 
 

@@ -23,7 +23,7 @@ import os
 from CsvHandler import CsvHandler
 
 
-class DataProducer():
+class DataProducer:
 
 	def __init__(self,name,now_time="2015-09-30"):
 #		self.share=Share(name)
@@ -33,7 +33,7 @@ class DataProducer():
 
 		self.now_time = now_time
 		self.DIR_NAME="../data/"
-		self.ch=CsvHandler(name,nowtime)
+		self.C = CsvHandler(self.name,self.now_time)
 
 
 #csvをチェック
@@ -50,9 +50,9 @@ class DataProducer():
 		#何日おきにつくるか
 		print"making datemap csv..."
 		N=1
-		self.yahoo_data=self.get_data(self.name)
+		self.yahoo_data=self.C.get_data(self.name)
 		size=len(self.yahoo_data["aver"])
-		obj = self.read_csv(self.name)
+		obj = self.C.read_csv(self.name)
 		g=open(self.DIR_NAME+self.name+"_datemap.csv","w")
 		fieldnames=("Column","Start","End","TargetDay")
 		headers = dict( (n,n) for n in fieldnames )
@@ -76,13 +76,13 @@ class DataProducer():
 	def make_train_data(self,term,k,per):
 		#何日おきにつくるか
 		N=1
-		self.yahoo_data=self.get_data(self.name)
+		self.yahoo_data=self.C.get_data(self.name)
 		print"making trainning data..."
 		size=len(self.yahoo_data["aver"])
 		col=size-term-k+1
 
 		#初期化 最初の時点
-		self.x_yahoo_data=np.zeros((col,3*k))
+		self.x_yahoo_data=np.zeros((col,3*(k+1)))
 		self.y_yahoo_data=np.zeros(col)
 
 		#print len(self.yahoo_data["aver"]),len(self.yahoo_data["low"]),len(self.yahoo_data["high"])
