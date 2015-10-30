@@ -20,7 +20,6 @@ class DataUtilFunc:
         input_s = np.array(input_s.T)
         return input_s, M, Sd
 
-
     ## Plot func
     def regression_acc_plot(self,target,predict,epoch,compname):
         filename=compname+"_acc_regression"+".jpg"
@@ -36,7 +35,6 @@ class DataUtilFunc:
 
     def regressio_plot(self):
         filename=compname+"_regression"+".jpg"
-
 
 
 

@@ -23,6 +23,8 @@ from chainer import optimizers
 from DataUtilFunc import DataUtilFunc
 import sys
 
+
+
 class Training(DataUtilFunc):
     """ Training """
 
