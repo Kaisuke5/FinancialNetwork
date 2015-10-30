@@ -1,3 +1,7 @@
 data/
 src/*.pyc
+<<<<<<< HEAD
+src/unuseful/
 log/
+=======
+>>>>>>> f77f4dfe012534124d9ba5924a60d13bdd75291c

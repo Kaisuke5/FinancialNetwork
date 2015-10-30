@@ -8,11 +8,9 @@ import os
 
 class CsvHandler:
 
-	def __init__(self,name,now_time):
-		self.name = name
-		self.now_time = now_time
+	def __init__(self):
 		self.DIR_NAME="../data/"
-		print self.DIR_NAME
+		print "save path:",self.DIR_NAME
 		pass
 
 	def csv_check(self,name,now_time):
@@ -20,10 +18,19 @@ class CsvHandler:
 	    	self.make_csv(name,now_time)
 
 	def make_csv(self,name,now_time):
+		if os.path.exists(self.DIR_NAME+name+".csv"):
+			print "Already have a %s.csv"%name
+			return
 		print "making %s.csv....." %name
 		from yahoo_finance import Share
-		share=Share(name)		
-		start=share.get_info()["start"]		
+		share=Share(name)
+
+		info=share.get_info()		
+		if "start" not in info:
+			print "Cant make a %s.csv"%name
+			return -1
+		start=info["start"]		
+		
 		obj=share.get_historical(start,now_time)
 		
 		filename=name+".csv"

@@ -23,8 +23,7 @@ import os
 from CsvHandler import CsvHandler
 
 
-
-class DataProducer(CsvHandler):
+class DataProducer():
 
 	def __init__(self,name,now_time="2015-09-30"):
 #		self.share=Share(name)
@@ -34,10 +33,11 @@ class DataProducer(CsvHandler):
 
 		self.now_time = now_time
 		self.DIR_NAME="../data/"
+		self.ch=CsvHandler(name,nowtime)
 
 
 #csvをチェック
-#CsvHandler.get_data
+#CsvHandler.get_datai
 
 	#csvからaggregatorでデータをとってくる(まだ加工前)
 
