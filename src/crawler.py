@@ -8,7 +8,7 @@ C=CsvHandler.CsvHandler()
 DATE="2015-10-28"
 companys=["FB","GOOG"]
 sleep_time=60
-NUM=10
+NUM=1000
 
 
 count=0
